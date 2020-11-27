@@ -25,10 +25,8 @@ Please execute the following steps to restore restic & nextcloud:
 9. Resore SQL backup:<br />
 `docker exec nextcloud-db sh -c "/usr/bin/mysql -u nextcloud -p$dbPassword < /config/backup/<filename>.bak" &>> $LOGFILE`
 10. Copy data and apps folder from Restore folder to Nextcloud folder:<br />
-```
-cp -r data/ /mnt/nextcloud
-cp -r apps/ /mnt/nextcloud
-```
+`cp -r data/ /mnt/nextcloud`<br />
+`cp -r apps/ /mnt/nextcloud`
 11. chown /data and apps/ to www-data:www-data:<br />
 `chown -R www-data:www-data data/ apps/`
 12. Execute maintenance:fingerprint:<br />
