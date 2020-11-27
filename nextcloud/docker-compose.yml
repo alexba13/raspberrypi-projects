@@ -1,0 +1,42 @@
+version: '3'
+
+volumes:
+    data:
+    config:
+    db:
+    apps:
+    html:
+
+networks:
+    nextcloud_network:
+
+services:
+    nextcloud-db:
+        image: linuxserver/mariadb
+        container_name: nextcloud-db
+        networks:
+            - nextcloud_network
+        restart: always
+        volumes:
+            - /mnt/nextcloud/db:/config
+        environment:
+            - MYSQL_ROOT_PASSWORD=<password>
+            - MYSQL_PASSWORD=<admin_password>
+            - MYSQL_USER=nextcloud
+            - MYSQL_DATABASE=nextcloud
+
+    nextcloud:
+        image: nextcloud
+        container_name: nextcloud-app
+        restart: always
+        networks:
+            - nextcloud_network
+        ports:
+            - 1000:80
+        depends_on:
+            - nextcloud-db
+        volumes:
+            - /mnt/nextcloud/html:/var/www/html
+            - /mnt/nextcloud/apps:/var/www/html/custom_apps
+            - /mnt/nextcloud/config:/var/www/html/config
+            - /mnt/nextcloud/data:/var/www/html/data
