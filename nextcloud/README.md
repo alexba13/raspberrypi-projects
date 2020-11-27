@@ -2,7 +2,9 @@
 tbd
 
 ## Docker-compose
-tbd
+To start Nextcloud, you can use the docker-compose file in this directory.
+The docker-compose file will create two containers. One container is running the nextcloud application and the other container is running the MariaDB.
+
 
 ## Backup & restore with restic
 For creating a backup use the nc_backup.sh file. Adjust the variables and add your S3 bucket name.
