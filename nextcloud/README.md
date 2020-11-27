@@ -11,7 +11,7 @@ Please execute the following steps to restore restic & nextcloud:
 1. Create new containers or use existing ones
 2. Execute the setup (Admin account creation & database setup) 
 3. Set maintenance mode:
-´docker exec -u www-data nextcloud-app php occ maintenance:mode --on &>> $LOGFILE´
+`docker exec -u www-data nextcloud-app php occ maintenance:mode --on &>> $LOGFILE`
 4. Execute restic restore:
 **AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION restic -r s3:s3.amazonaws.com/xxxx --verbose --password-file=$PASSWORD_FILE restore latest --target ${restoreDir})**
 5. Create backup directory:
