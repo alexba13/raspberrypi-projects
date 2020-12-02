@@ -48,9 +48,8 @@ else
 fi
 
 # Maintenance Mode on
-echo "Maintenance Mode ENABLED..." >> $LOGFILE
-date >> $LOGFILE
 docker exec -u www-data nextcloud-app php occ maintenance:mode --on &>> $LOGFILE
+date >> $LOGFILE
 
 # Backup database
 echo "Backup MariaDB..." >> $LOGFILE
@@ -71,13 +70,12 @@ echo "---------------Ending restic backup---------------" >> $LOGFILE
 
 # Remove old backups
 echo "---------------Start cleanup of backup and disable maintenance mode---------------" >> $LOGFILE
-echo "Backups older than" ${backupage} "will be deleted"
+echo "Backups older than" ${backupage} "will be deleted" >> $LOGFILE
 find "${backupMainDir}" -type d -mtime +"${backupage}" | xargs rm -rf &>> $LOGFILE
 
 # Maintenance Mode off
-echo "Maintenance Mode DISABLED..." >> $LOGFILE
-date >> $LOGFILE
 docker exec -u www-data nextcloud-app php occ maintenance:mode --off &>> $LOGFILE
+date >> $LOGFILE
 
 # Backup Finished
 date >> $LOGFILE
