@@ -32,6 +32,6 @@ Please execute the following steps to restore restic & nextcloud:
 11. chown /data and apps/ to www-data:www-data:<br />
 `chown -R www-data:www-data data/ apps/`
 12. Execute maintenance:fingerprint:<br />
-`docker exec -u www-data nextcloud-app php occ maintenance:data-fingerprint --off &>> $LOGFILE`
+`docker exec -u www-data nextcloud-app php occ maintenance:data-fingerprint &>> $LOGFILE`
 13. End maintenance mode:<br />
 `docker exec -u www-data nextcloud-app php occ maintenance:mode --off &>> $LOGFILE`
