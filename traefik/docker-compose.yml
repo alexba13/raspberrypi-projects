@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  traefik:
+    image: traefik
+    container_name: traefik
+    hostname: "traefik"
+    restart: always
+    ports:
+      - "80:80"
+      - "1111:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - $PWD/config/traefik.yml:/etc/traefik/traefik.yml
+      - $PWD/config/dynamic_conf.yml:/etc/traefik/dynamic_conf.yml
+    labels:
+      - "traefik.http.routers.dashboard.entrypoints=http"
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`dashboard.smart.home`)"
+      - "traefik.docker.network=traefik_net"
+      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+
+networks:
+  default:
+    external:
+      name: traefik_net
