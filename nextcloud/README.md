@@ -16,8 +16,7 @@ Please execute the following steps to restore restic & nextcloud:
 `docker exec -u www-data nextcloud-app php occ maintenance:mode --on &>> $LOGFILE`
 4. Execute restic restore:<br />
 `AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION restic -r s3:s3.amazonaws.com/xxxx --verbose --password-file=$PASSWORD_FILE restore latest --target ${restoreDir})`
-5. Create backup directory:<br />
-`mkdir /mnt/nextcloud/db/`
+5. Create backup directory under `/mnt/nextcloud/db/`
 6. Copy .sql file to new backup directory:<br />
 `cp <bak_file_in_restore_dir> /mnt/nextcloud/db/backup`
 7. DROP Database:<br />
