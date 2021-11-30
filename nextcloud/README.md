@@ -34,3 +34,9 @@ Please execute the following steps to restore restic & nextcloud:
 `docker exec -u www-data nextcloud-app php occ maintenance:data-fingerprint &>> $LOGFILE`
 13. End maintenance mode:<br />
 `docker exec -u www-data nextcloud-app php occ maintenance:mode --off &>> $LOGFILE`
+
+## Adding new Apps
+1. Download the tar.gz file for the app you want to install
+2. Extract it to `/var/www/nextcloud/apps/` directory
+3. Change to `/var/www/nextcloud/` directory
+4. Execute `docker exec -u www-data nextcloud-app php occ app:enable <app_name>`
