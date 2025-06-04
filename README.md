@@ -1,3 +1,5 @@
 # raspberrypi-projects
 
-tbd
+upcoming:
+- UI for Docker Containers
+- JuptyerLab-as-a-Service
