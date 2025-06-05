@@ -21,3 +21,6 @@ Logs:
                            \
 [ Host Logs ] --------> [ Alloy ] --> [ Loki ] --> [ Grafana ]
 ```
+
+- also possible to use loki as docker driver directly for the docker logs: https://grafana.com/docs/loki/latest/send-data/docker-driver/
+- alloy than for the local rpi logs
