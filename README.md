@@ -11,3 +11,4 @@ upcoming:
 
 fixes:
 - update readme files and upload all files to GitHub
+- update nextcloud to latest version
