@@ -11,6 +11,7 @@ upcoming:
 fixes:
 - update readme files and upload all files to GitHub
 - update nextcloud to latest version
+- replace node exporter with alloy
 
 
 Logs:
@@ -18,5 +19,5 @@ Logs:
 [ Docker Logs ] --------->  
                           \
                            \
-[ Host Logs ] --------> [ Promtail ] --> [ Loki ] --> [ Grafana ]
+[ Host Logs ] --------> [ Alloy ] --> [ Loki ] --> [ Grafana ]
 ```
