@@ -7,3 +7,4 @@ upcoming:
 
 fixes:
 - remove `dynamic-conf.yml` in Traefik
+- update readme files and upload all files to GitHub
