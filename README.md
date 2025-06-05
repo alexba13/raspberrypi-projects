@@ -6,7 +6,6 @@ upcoming:
 - Automatic weekly updates (e.g. restic)
 - Woodpecker CI install and setup
 - Code-Server
-- Portainer
 - Loki integrated into Grafana
 
 fixes:
