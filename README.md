@@ -12,6 +12,7 @@ fixes:
 - update readme files and upload all files to GitHub
 - update nextcloud to latest version
 - replace node exporter with alloy
+- migrate loki from filesystem to s3
 
 
 Logs:
