@@ -8,8 +8,8 @@ upcoming:
 
 fixes:
 - update readme files and upload all files to GitHub
-- update nextcloud to latest version
 - replace node exporter with alloy
+- folder usage: sudo du -h --max-depth=1 /var | sort -hr
 
 Logs:
 ```
