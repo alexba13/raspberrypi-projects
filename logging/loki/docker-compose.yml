@@ -1,0 +1,23 @@
+services:
+  loki:
+    image: grafana/loki:latest
+    container_name: loki
+    restart: always
+    command:
+      - -config.file=/mnt/config/loki-config.yml
+      - -config.expand-env=true
+    ports:
+      - "3100:3100"
+    volumes:
+      - "/home/pi/logging/loki/config:/mnt/config"
+    networks:
+      - traefik_net
+    environment:
+      BUCKET: ${BUCKET}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_REGION: ${AWS_REGION}
+
+networks:
+    traefik_net:
+        external: true

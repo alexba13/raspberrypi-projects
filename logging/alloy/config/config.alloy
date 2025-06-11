@@ -1,0 +1,76 @@
+loki.write "default" {
+  endpoint {
+    url = "http://loki:3100/loki/api/v1/push"
+  }
+}
+
+// Docker logs
+discovery.docker "linux" {
+  host = "unix:///var/run/docker.sock"
+}
+
+loki.relabel "docker_labels" {
+  rule {
+    source_labels = ["__meta_docker_container_name"]
+    target_label  = "container_name"
+    // Remove leading slash if present
+    regex        = "^/(.*)"
+    replacement  = "$1"
+  }
+  rule {
+    source_labels = ["__meta_docker_container_id"]
+    target_label  = "container_id"
+  }
+
+  forward_to = [loki.write.default.receiver]
+}
+
+loki.source.docker "default" {
+  host       = "unix:///var/run/docker.sock"
+  targets    = discovery.docker.linux.targets
+  labels     = { component = "docker" }
+
+  relabel_rules = loki.relabel.docker_labels.rules
+
+  forward_to = [loki.write.default.receiver]
+}
+
+// Nextcloud
+local.file_match "nextcloud_logs" {
+  path_targets = [{"__path__" = "/var/log/nextcloud.log"}]
+  sync_period = "60s"
+}
+
+loki.source.file "local_files" {
+    targets    = local.file_match.nextcloud_logs.targets   
+    forward_to = [loki.process.nextcloud_label.receiver]
+}
+
+loki.process "nextcloud_label" {
+  forward_to = [loki.write.default.receiver]
+  
+  stage.static_labels {
+    values = { component = "nextcloud" }
+  }
+}
+
+// Journal log
+loki.relabel "journal" {
+  forward_to = [loki.write.default.receiver]
+
+  rule {
+    source_labels = ["__journal__systemd_unit"]
+    target_label  = "unit"
+  }
+}
+
+loki.source.journal "read"  {
+  forward_to    = [loki.write.default.receiver]
+  relabel_rules = loki.relabel.journal.rules
+  labels        = {component = "loki.source.journal"}
+}
+
+logging {
+  level  = "debug"
+  format = "logfmt"
+}

@@ -1,0 +1,34 @@
+services:
+  alloy:
+    image: grafana/alloy:latest
+    container_name: alloy
+    restart: always
+    command:
+      - run
+      - --server.http.listen-addr=0.0.0.0:12345
+      - --storage.path=/var/lib/alloy/data
+      - /etc/alloy/config.alloy
+      - --disable-reporting
+    ports:
+      - "12345:12345"
+    volumes:
+      - /home/pi/logging/alloy/config/config.alloy:/etc/alloy/config.alloy:ro
+      - alloy-data:/var/lib/alloy/data
+      - /var/log/nextcloud.log:/var/log/nextcloud.log:ro
+      - /run/log/journal:/run/log/journal:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - traefik_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.alloy.entrypoints=http"
+      - "traefik.http.routers.alloy.rule=Host(`alloy.smart.home`)"
+      - "traefik.docker.network=traefik_net"
+      - "traefik.http.services.alloy.loadbalancer.server.port=12345"
+
+networks:
+    traefik_net:
+        external: true
+
+volumes:
+  alloy-data:
