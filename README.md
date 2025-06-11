@@ -7,6 +7,7 @@ upcoming:
 - Code-Server
 - Image-Scanning
 - Runtime-Scanning
+- Enable Dependabot
 
 fixes:
 - update readme files and upload all files to GitHub
