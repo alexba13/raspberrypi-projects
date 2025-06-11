@@ -5,6 +5,8 @@ upcoming:
 - Automatic weekly updates (e.g. restic)
 - Woodpecker CI install and setup
 - Code-Server
+- Image-Scanning
+- Runtime-Scanning
 
 fixes:
 - update readme files and upload all files to GitHub
