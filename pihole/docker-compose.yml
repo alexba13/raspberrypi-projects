@@ -1,5 +1,3 @@
-version: "3"
-
 services:
     pihole:
         image: pihole/pihole:latest
@@ -7,18 +5,20 @@ services:
         restart: always
         ports:
             - "53:53/tcp"
-            - "53:53/udp"
+            - "192.168.178.61:53:53/udp"
+            - "8081:80"
         environment:
             - TZ=Europe/Berlin
-            - DNS1=194.25.0.68
-            - DNS2=194.25.0.52
+            - FTLCONF_dns_upstreams=194.25.0.68;194.25.0.52
+            - FTLCONF_dns_hosts=192.168.178.1 fritz.box;192.168.178.61 pihole.smart.home;192.168.178.61 dashboard.smart.home;192.168.178.61 grafana.smart.home;192.168.178.61 nextcloud.smart.home;192.168.178.61 portainer.smart.home;192.168.178.61 alloy.smart.home
+            - FTLCONF_dns_listeningMode=ALL
         volumes:
-            - '/home/pi/etc-pihole/:/etc/pihole/'
-            - '/home/pi/etc-dnsmasq.d/:/etc/dnsmasq.d/'
+            - "/home/pi/etc-pihole/:/etc/pihole/"
         networks:
             - traefik_net
         dns:
-            - 127.0.0.1
+            - 194.25.0.68
+            - 194.25.0.52
         labels:
             - "traefik.enable=true"
             - "traefik.http.routers.pihole.entrypoints=http"
@@ -29,4 +29,3 @@ services:
 networks:
     traefik_net:
         external: true
-

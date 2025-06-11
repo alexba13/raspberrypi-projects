@@ -5,9 +5,15 @@ tbd
 To start Nextcloud, you can use the docker-compose file in this directory.
 The docker-compose file will create two containers. One container is running the nextcloud application and the other container is running the MariaDB.
 
-
-## Backup & restore with restic
+## Backup
 For creating a backup use the nc_backup.sh file. Adjust the variables and add your S3 bucket name.
+
+```
+# Running at 03:00 AM every night
+0 3 * * * /root/nextcloud_backup/nc_backup.sh
+```
+
+## Restore with restic
 Please execute the following steps to restore restic & nextcloud:
 
 1. Create new containers or use existing ones
