@@ -10,3 +10,4 @@ fixes:
 - update readme files and upload all files to GitHub
 - replace node exporter with alloy
 - folder usage: sudo du -h --max-depth=1 /var | sort -hr
+- adding grafana.db into restic backup
