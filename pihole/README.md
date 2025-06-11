@@ -1,4 +1,5 @@
 ## PiHole
+tbd
 
 ### Used adlists
 - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
@@ -7,7 +8,7 @@
 - https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt
 - https://raw.githubusercontent.com/bigdargon/hostsVN/master/hosts
 - https://raw.githubusercontent.com/RPiList/specials/master/Blocklisten/notserious
-- https://raw.githubusercontent.com/RPiList/specials/master/Blocklisten/Phishing-Angriffe
+- https://raw.githubusercontent.com/RPiList/specials/master/Blocklisten/Phishing-Angrifferiffe
 - https://raw.githubusercontent.com/RPiList/specials/master/Blocklisten/spam.mails
 - https://raw.githubusercontent.com/RPiList/specials/master/Blocklisten/crypto
 - https://raw.githubusercontent.com/RPiList/specials/master/Blocklisten/easylist
