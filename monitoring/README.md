@@ -4,7 +4,7 @@ All those apps are running as Docker containers as defined in the `docker-compos
 
 ## Textfile collector
 The textfile collector will collect logs from the Raspberry Pi directly every 15 minutes.
-To get this running, the crontab needs to be updated with `crontab -e` as the non-root user:
+To get this running, crontab needs to be updated with `crontab -e` as the non-root user:
 
 ```
 # Folder usage via Node exporter textfile collector
