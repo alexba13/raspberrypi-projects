@@ -1,4 +1,5 @@
 # Pi-hole
+
 Pi-hole is being used for blocking unused DNS traffic and for Ad blocking.
 
 In addition, a private domain (`smart.home`) is also being created. The entries for for the name resultion are mentioned in the `docker-compose.yml` file.
@@ -18,6 +19,7 @@ So that the Pi-hole can function as the DNS server, the IP of the Raspberry PI h
 - Home network > Network settings > more settings > IPv4 settings > enter IP of Raspberry Pi into `local DNS server`
 
 ## Used Adlists
+
 - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
 - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
 - https://v.firebog.net/hosts/AdguardDNS.txt
@@ -31,4 +33,5 @@ So that the Pi-hole can function as the DNS server, the IP of the Raspberry PI h
 
 
 ## Helpful links:
+
 https://discourse.pi-hole.net/t/solve-dns-resolution-in-other-containers-when-using-docker-pihole/31413

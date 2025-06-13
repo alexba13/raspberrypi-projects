@@ -1,8 +1,10 @@
 # Nextcloud
+
 Nextcloud is used to store images and documents.
 It is also running as Docker container defined with an `docker-compose.yml` file which is in this directory.
 
 ## Storage
+
 All files will be stored on an external SSD connected with USB to the Raspberry PI.
 
 The SSD needs to be connected before the installation. Once the SSD is plugged into the Raspberry Pi, execute the next steps:
@@ -34,6 +36,7 @@ UUID=THE_UUID /mnt/nextcloud/ ext4 defaults,auto 0 3
 ```
 
 ## Installation
+
 To start Nextcloud, you can use the `docker-compose.yml` file in this directory.
 This will create two containers:
 
@@ -41,6 +44,7 @@ This will create two containers:
 - One container for the MariaDB
 
 ## Backup
+
 Restic will be used for creating the backups. Create the `nc_backup.sh` file. Adjust the variables and add your S3 bucket name.
 
 ```
@@ -64,6 +68,7 @@ crontab -e
 ```
 
 ## Restore with restic
+
 Please execute the following steps to restore restic & nextcloud:
 
 1. Create new containers or use existing ones
@@ -92,6 +97,7 @@ Please execute the following steps to restore restic & nextcloud:
 `docker exec -u www-data nextcloud-app php occ maintenance:mode --off &>> $LOGFILE`
 
 ## Adding new Apps
+
 1. Download the tar.gz file for the app you want to install
 2. Extract it to `/var/www/nextcloud/apps/` directory
 3. Change to `/var/www/nextcloud/` directory
