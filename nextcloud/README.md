@@ -37,7 +37,17 @@ UUID=THE_UUID /mnt/nextcloud/ ext4 defaults,auto 0 3
 
 ## Installation
 
-To start Nextcloud, you can use the `docker-compose.yml` file in this directory.
+:warning:
+
+Before you start with the deployment of Traefik, create the needed Docker network first.
+
+```
+docker network create --driver bridge docker_nextcloud_network
+```
+
+:warning:
+
+To install Nextcloud, you can use the `docker-compose.yml` file in this directory.
 This will create two containers:
 
 - One container is running the Nextcloud application
@@ -46,6 +56,8 @@ This will create two containers:
 ## Backup
 
 Restic will be used for creating the backups. Create the `nc_backup.sh` file. Adjust the variables and add your S3 bucket name.
+
+Also, for the backup process, a password for the backup store of Restic needs to be saved. Store it as raspberry user under `./resticpw/pw`.
 
 ```
 # Login as sudo
@@ -64,8 +76,11 @@ crontab -e
 
 # Running at 03:00 AM every night
 0 3 * * * /root/nextcloud_backup/nc_backup.sh
-
 ```
+
+### Logging
+
+The logging of the backup process will be stored in `/var/log/nextcloud.log`. This file will also be detected from Alloy and pushed to Loki/Grafana.
 
 ## Restore with restic
 

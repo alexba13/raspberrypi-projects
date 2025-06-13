@@ -2,16 +2,16 @@
 
 Currently there are several apps running on my Raspberry Pi. Here is a current list with the link to the documentation:
 
-- Monitoring
-- Grafana Dashboards
-- Prometheus
-- Logging
-- Nextcloud
-- OpenHab
-- Pi-Hole
-- Portainer
-- Restic
-- Traefik
+- [Monitoring](/monitoring/)
+- [Grafana Dashboards](/grafana/)
+- [Prometheus](/prometheus/)
+- [Logging](/logging/)
+- [Nextcloud](/nextcloud/)
+- [OpenHab](/openhab/)
+- [Pi-hole](/pihole/)
+- [Portainer](/portainer/)
+- [Restic](/restic/)
+- [Traefik](/traefik/)
 
 Possible upcoming apps/ideas:
 - JuptyerLab-as-a-Service
