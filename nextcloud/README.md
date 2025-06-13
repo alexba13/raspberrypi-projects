@@ -1,16 +1,66 @@
 # Nextcloud
-tbd
+Nextcloud is used to store images and documents.
+It is also running as Docker container defined with an `docker-compose.yml` file which is in this directory.
 
-## Docker-compose
-To start Nextcloud, you can use the docker-compose file in this directory.
-The docker-compose file will create two containers. One container is running the nextcloud application and the other container is running the MariaDB.
+## Storage
+All files will be stored on an external SSD connected with USB to the Raspberry PI.
 
-## Backup
-For creating a backup use the nc_backup.sh file. Adjust the variables and add your S3 bucket name.
+The SSD needs to be connected before the installation. Once the SSD is plugged into the Raspberry Pi, execute the next steps:
 
 ```
+# Login as sudo
+sudo su -
+
+# Check if SSD is connected. Should be /dev/sda1
+lsblk
+
+# Create mount directory
+mkdir /mnt/nextcloud
+
+# Mount the SSD to the directory
+mount /dev/sda1 /mnt/nextcloud
+
+# Check mount
+df -h
+
+# Get UUID and TYPE for fstab
+blkid
+
+# Edit /etc/fstab
+nano /etc/fstab
+
+# Add something like this at the end of the file
+UUID=THE_UUID /mnt/nextcloud/ ext4 defaults,auto 0 3
+```
+
+## Installation
+To start Nextcloud, you can use the `docker-compose.yml` file in this directory.
+This will create two containers:
+
+- One container is running the Nextcloud application
+- One container for the MariaDB
+
+## Backup
+Restic will be used for creating the backups. Create the `nc_backup.sh` file. Adjust the variables and add your S3 bucket name.
+
+```
+# Login as sudo
+sudo su -
+
+# Create directory
+mkdir ./nextcloud_backup
+
+# Create nc_backup.sh and add the content from the file
+nano nc_backup.sh
+
+# Adjust crontab
+crontab -e
+
+# Add the following at the bottom of the file
+
 # Running at 03:00 AM every night
 0 3 * * * /root/nextcloud_backup/nc_backup.sh
+
 ```
 
 ## Restore with restic
