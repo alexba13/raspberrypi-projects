@@ -12,8 +12,6 @@ services:
       - trivy-cache:/root/.cache/
       - $REPORT_DIR/:/reports
       - /home/pi/trivy/template/:/template
-    command: >
-      image your-image-name
     networks:
       - traefik_net
 
