@@ -6,7 +6,7 @@ trap 'echo "Script failed at line $LINENO"; exit 1' ERR
 TODAY=$(date +%d-%m-%y)
 LOG_DIR="/home/pi/trivy/logs/logs-$TODAY"
 LOG_FILE="/home/pi/trivy/logs/logs-$TODAY/trivy-scans.log"
-REPORT_DIR="/home/pi/trivy/reports/reports-$TODAY"
+REPORT_DIR="/home/pi/trivy/public/reports/reports-$TODAY"
 
 mkdir -p "$LOG_DIR"
 

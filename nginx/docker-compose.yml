@@ -1,0 +1,21 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+        - "8083:80"
+    networks:
+      - traefik_net
+    volumes:
+      - /home/pi/trivy/public:/usr/share/nginx/html:ro
+      - /home/pi/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.nginx.entrypoints=http"
+        - "traefik.http.routers.nginx.rule=Host(`trivy.smart.home`)"
+        - "traefik.docker.network=traefik_net"
+        - "traefik.http.services.nginx.loadbalancer.server.port=80"
+
+networks:
+    traefik_net:
+        external: true

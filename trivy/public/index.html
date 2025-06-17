@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All HTML Reports</title>
+  <style>
+    ul.tree, ul.tree ul {
+      list-style-type: none;
+      padding-left: 20px;
+    }
+
+    ul.tree label {
+      cursor: pointer;
+    }
+
+    ul.tree input {
+      position: absolute;
+      opacity: 0;
+    }
+
+    ul.tree input ~ ul {
+      display: none;
+    }
+
+    ul.tree input:checked ~ ul {
+      display: block;
+    }
+
+    li a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>All Trivy HTML Reports</h1>
+  <ul class="tree" id="tree-root"></ul>
+
+  <script>
+    async function fetchAndParseDir(path = '/') {
+      const response = await fetch(path);
+      const text = await response.text();
+      const doc = new DOMParser().parseFromString(text, 'text/html');
+      const links = [...doc.querySelectorAll('a')];
+      const children = [];
+
+      for (const link of links) {
+        const href = link.getAttribute('href');
+        if (href === '../') continue;
+
+        const isDir = href.endsWith('/');
+        const fullPath = path + href;
+
+        if (isDir) {
+          const subTree = await fetchAndParseDir(fullPath);
+          children.push({
+            name: href.replace(/\/$/, ''),
+            path: fullPath,
+            isDir: true,
+            children: subTree
+          });
+        } else if (href.endsWith('.html') || href.endsWith('.htm')) {
+          children.push({
+            name: href,
+            path: fullPath,
+            isDir: false
+          });
+        }
+      }
+      return children;
+    }
+
+    function renderTree(container, nodes) {
+      nodes.forEach(node => {
+        const li = document.createElement('li');
+        if (node.isDir) {
+          const id = 'toggle-' + Math.random().toString(36).substr(2, 9);
+          li.innerHTML = `
+            <label for="${id}">📁 ${node.name}</label>
+            <input type="checkbox" id="${id}">
+            <ul></ul>
+          `;
+          container.appendChild(li);
+          renderTree(li.querySelector('ul'), node.children);
+        } else {
+          li.innerHTML = `<a href="${node.path}">📄 ${node.name}</a>`;
+          container.appendChild(li);
+        }
+      });
+    }
+
+    (async () => {
+    const root = document.getElementById('tree-root');
+    const tree = await fetchAndParseDir('/reports/');
+    renderTree(root, tree);
+  })();
+  </script>
+</body>
+</html>
