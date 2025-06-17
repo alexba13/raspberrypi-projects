@@ -12,14 +12,13 @@ Currently there are several apps running on my Raspberry Pi. Here is a current l
 - [Portainer](/portainer/)
 - [Restic](/restic/)
 - [Traefik](/traefik/)
+- [nginx](/nginx/)
+- [Trivy](/trivy/)
 
 Possible upcoming apps/ideas:
 - JuptyerLab-as-a-Service
 - Automatic weekly updates (e.g. restic)
-- Woodpecker CI install and setup
 - Code-Server
-- Image-Scanning
-- Runtime-Scanning
 - Enable Dependabot
 
 Fixes needs to be done:
@@ -27,3 +26,4 @@ Fixes needs to be done:
 - replace node exporter with alloy
 - folder usage: sudo du -h --max-depth=1 /var | sort -hr
 - adding grafana.db into restic backup
+- add Trivy logs into Alloy
